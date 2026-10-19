@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineBook | Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a>
+      <div class="nav-links">
+        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="movies.html">Movies</a>
+        <a class="nav-link" href="my-bookings.html">My Bookings</a>
+        <a class="nav-cta" href="movies.html">Book tickets <span aria-hidden="true">↗</span></a>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR MOVIE NIGHT STARTS HERE</div>
+        <h1>Big stories.<br><span>Better seats.</span></h1>
+        <p class="hero-description">Find your next favourite film and book your seats in just a few clicks. Your perfect movie night is closer than ever.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="movies.html">Explore movies <span aria-hidden="true">→</span></a>
+          <a class="button button-secondary" href="my-bookings.html">View my bookings</a>
+        </div>
+        <div class="hero-meta"><span class="meta-icon">✦</span><span>Simple booking</span><span class="meta-divider"></span><span>Instant confirmation on this device</span></div>
+      </div>
+      <div class="hero-art" aria-label="Cinematic movie illustration">
+        <div class="poster-glow"></div>
+        <div class="hero-poster poster-interstellar">
+          <div class="poster-topline">CINEBOOK PRESENTS</div>
+          <div class="planet planet-one"></div><div class="planet planet-two"></div>
+          <div class="poster-title">INTER<br>STELLAR</div>
+          <div class="poster-bottom">THE UNIVERSE IS CALLING</div>
+        </div>
+        <div class="floating-ticket"><span class="ticket-icon">▰</span><span><strong>Movie night?</strong><small>Your seat is waiting.</small></span><span class="ticket-arrow">↗</span></div>
+        <div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✧</div>
+      </div>
+    </section>
+
+    <section class="stats-strip container">
+      <div class="stat"><strong>04</strong><span>Featured movies</span></div>
+      <div class="stat"><strong>05</strong><span>Daily showtimes</span></div>
+      <div class="stat"><strong>₹180<span class="stat-plus">+</span></strong><span>Ticket prices</span></div>
+      <div class="stat stat-note"><span class="stat-star">✦</span><span>Pick a film.<br>Make a memory.</span></div>
+    </section>
+
+    <section class="section container">
+      <div class="section-heading">
+        <div><div class="eyebrow">NOW SHOWING</div><h2>Popular this week</h2><p class="section-description">A few favourites worth seeing on the big screen.</p></div>
+        <a class="text-link" href="movies.html">See all movies <span>→</span></a>
+      </div>
+      <div class="movie-grid home-movie-grid">
+        <article class="movie-card">
+          <a class="poster poster-interstellar" href="booking.html?movie=Interstellar" aria-label="Book Interstellar"><span class="poster-kicker">SCI-FI · DRAMA</span><span class="poster-graphic graphic-space"></span><span class="poster-wordmark">INTER<br>STELLAR</span><span class="poster-caption">MANKIND'S NEXT STEP</span></a>
+          <div class="movie-card-body"><div><h3>Interstellar</h3><p class="movie-genre">Sci-Fi · Adventure</p></div><span class="price">₹200</span></div>
+          <a class="card-book-link" href="booking.html?movie=Interstellar">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card">
+          <a class="poster poster-inception" href="booking.html?movie=Inception" aria-label="Book Inception"><span class="poster-kicker">DREAMS WITHIN DREAMS</span><span class="poster-graphic graphic-city"></span><span class="poster-wordmark">INCEPTION</span><span class="poster-caption">YOUR MIND IS THE SCENE</span></a>
+          <div class="movie-card-body"><div><h3>Inception</h3><p class="movie-genre">Sci-Fi · Thriller</p></div><span class="price">₹180</span></div>
+          <a class="card-book-link" href="booking.html?movie=Inception">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card">
+          <a class="poster poster-darkknight" href="booking.html?movie=The%20Dark%20Knight" aria-label="Book The Dark Knight"><span class="poster-kicker">GOTHAM CITY</span><span class="poster-graphic graphic-bat"></span><span class="poster-wordmark">THE DARK<br>KNIGHT</span><span class="poster-caption">WHY SO SERIOUS?</span></a>
+          <div class="movie-card-body"><div><h3>The Dark Knight</h3><p class="movie-genre">Action · Crime</p></div><span class="price">₹220</span></div>
+          <a class="card-book-link" href="booking.html?movie=The%20Dark%20Knight">Book tickets <span>→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="bottom-cta container">
+      <div><div class="eyebrow">YOUR NEXT ADVENTURE</div><h2>The best seat in the house is one click away.</h2></div>
+      <a class="button button-primary" href="movies.html">Find your movie <span>→</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand footer-brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a><p>Made for movie lovers. © <span class="current-year"></span> CineBook</p><div class="footer-links"><a href="movies.html">Movies</a><a href="my-bookings.html">My Bookings</a></div></div></footer>
+</body>
+</html>

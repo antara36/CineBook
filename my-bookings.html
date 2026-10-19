@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineBook | My Bookings</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="movies.html">Movies</a>
+        <a class="nav-link active" href="my-bookings.html">My Bookings</a>
+        <a class="nav-cta" href="movies.html">Book tickets <span aria-hidden="true">↗</span></a>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <section class="page-heading container bookings-page-heading">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR MOVIE PLANS</div>
+      <h1>Your <span>bookings.</span></h1>
+      <p>All your saved CineBook reservations, together in one place.</p>
+    </section>
+    <section class="container bookings-section">
+      <div class="bookings-toolbar"><div><h2>Booking history</h2><p id="bookingCount">Your reservations will appear here.</p></div><a class="button button-secondary" href="movies.html">+ Book another movie</a></div>
+      <div id="bookingsList" class="bookings-list" aria-live="polite"></div>
+      <div id="emptyBookings" class="empty-bookings">
+        <div class="empty-ticket">▱</div><h2>No bookings yet</h2><p>Your next movie night is waiting. Browse the movies and book your first ticket.</p><a class="button button-primary" href="movies.html">Explore movies <span>→</span></a>
+      </div>
+      <p class="storage-note"><span>ⓘ</span> Your bookings are stored in LocalStorage in this browser. They won't automatically appear on another device or browser.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand footer-brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a><p>Made for movie lovers. © <span class="current-year"></span> CineBook</p><div class="footer-links"><a href="movies.html">Movies</a><a href="my-bookings.html">My Bookings</a></div></div></footer>
+</body>
+</html>

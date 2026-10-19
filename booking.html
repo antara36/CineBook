@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineBook | Book Tickets</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="movies.html">Movies</a>
+        <a class="nav-link" href="my-bookings.html">My Bookings</a>
+        <a class="nav-cta" href="movies.html">Book tickets <span aria-hidden="true">↗</span></a>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <section class="page-heading container booking-heading">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> MAKE IT A MOVIE NIGHT</div>
+      <h1>Book your <span>tickets.</span></h1>
+      <p>Fill in your details below to reserve your show.</p>
+    </section>
+    <section class="container booking-layout">
+      <div class="booking-panel">
+        <div class="panel-heading"><span class="step-number">01</span><div><h2>Your details</h2><p>Tell us who's coming along.</p></div></div>
+        <form id="bookingForm">
+          <div class="form-grid">
+            <div class="form-field"><label for="customerName">Full name</label><input id="customerName" name="customerName" type="text" placeholder="Enter your name" required maxlength="70"></div>
+            <div class="form-field"><label for="customerEmail">Email address</label><input id="customerEmail" name="customerEmail" type="email" placeholder="you@example.com" required maxlength="100"></div>
+            <div class="form-field full-field"><label for="movieSelect">Choose a movie</label><select id="movieSelect" name="movie" required><option value="">Select a movie</option><option value="Interstellar">Interstellar — ₹200</option><option value="Inception">Inception — ₹180</option><option value="The Dark Knight">The Dark Knight — ₹220</option><option value="Avengers: Endgame">Avengers: Endgame — ₹250</option></select></div>
+            <div class="form-field"><label for="showDate">Show date</label><input id="showDate" name="showDate" type="date" required></div>
+            <div class="form-field"><label for="showTime">Showtime</label><select id="showTime" name="showTime" required><option value="">Choose a showtime</option><option>10:00 AM</option><option>1:00 PM</option><option>4:00 PM</option><option>7:00 PM</option><option>10:00 PM</option></select></div>
+            <div class="form-field full-field"><label for="ticketCount">Number of tickets</label><select id="ticketCount" name="ticketCount" required><option value="1">1 ticket</option><option value="2">2 tickets</option><option value="3">3 tickets</option><option value="4">4 tickets</option><option value="5">5 tickets</option><option value="6">6 tickets</option></select></div>
+          </div>
+          <div class="form-message hidden" id="formMessage" role="status"></div>
+          <button class="button button-primary button-full submit-booking" type="submit">Confirm booking <span>→</span></button>
+          <p class="form-footnote"><span>♢</span> Demo project: bookings are saved in this browser only.</p>
+        </form>
+      </div>
+      <aside class="booking-summary">
+        <div class="summary-top"><span class="summary-label">YOUR ORDER</span><span class="summary-icon">✦</span></div>
+        <div class="summary-art poster-interstellar" id="summaryPoster"><span class="poster-kicker">CINEBOOK</span><span class="poster-graphic graphic-space"></span><span class="poster-wordmark" id="summaryPosterTitle">INTER<br>STELLAR</span><span class="poster-caption">YOUR NEXT MOVIE NIGHT</span></div>
+        <h3 id="summaryMovie">Choose your movie</h3><p class="summary-genre" id="summaryGenre">Your selection will appear here</p>
+        <div class="summary-divider"></div>
+        <div class="summary-row"><span>Price per ticket</span><strong id="summaryPrice">₹0</strong></div>
+        <div class="summary-row"><span>Tickets</span><strong id="summaryTickets">1</strong></div>
+        <div class="summary-divider"></div>
+        <div class="summary-total"><span>Total</span><strong id="summaryTotal">₹0</strong></div>
+        <p class="summary-note">Choose your movie and ticket count to update your total.</p>
+      </aside>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand footer-brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a><p>Made for movie lovers. © <span class="current-year"></span> CineBook</p><div class="footer-links"><a href="movies.html">Movies</a><a href="my-bookings.html">My Bookings</a></div></div></footer>
+</body>
+</html>

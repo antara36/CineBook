@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineBook | Movies</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link active" href="movies.html">Movies</a>
+        <a class="nav-link" href="my-bookings.html">My Bookings</a>
+        <a class="nav-cta" href="movies.html">Book tickets <span aria-hidden="true">↗</span></a>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <section class="page-heading container">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> FIND YOUR NEXT FAVOURITE</div>
+      <h1>Movies for <span>every mood.</span></h1>
+      <p>Choose a film, pick a showtime, and let the good times roll.</p>
+      <div class="movie-toolbar">
+        <div class="search-box"><span aria-hidden="true">⌕</span><input id="movieSearch" type="search" placeholder="Search movies..." aria-label="Search movies"></div>
+        <span class="showing-count" id="showingCount">4 movies available</span>
+      </div>
+    </section>
+    <section class="container movies-page-section">
+      <div class="movie-grid movie-grid-all" id="allMovies">
+        <article class="movie-card" data-title="interstellar" data-movie="Interstellar">
+          <a class="poster poster-interstellar" href="booking.html?movie=Interstellar" aria-label="Book Interstellar"><span class="poster-kicker">SCI-FI · DRAMA</span><span class="poster-graphic graphic-space"></span><span class="poster-wordmark">INTER<br>STELLAR</span><span class="poster-caption">MANKIND'S NEXT STEP</span></a>
+          <div class="movie-card-body"><div><h3>Interstellar</h3><p class="movie-genre">Sci-Fi · Adventure</p></div><span class="price">₹200</span></div><p class="movie-description">A journey beyond the stars to find a future for humanity.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Interstellar">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="inception" data-movie="Inception">
+          <a class="poster poster-inception" href="booking.html?movie=Inception" aria-label="Book Inception"><span class="poster-kicker">DREAMS WITHIN DREAMS</span><span class="poster-graphic graphic-city"></span><span class="poster-wordmark">INCEPTION</span><span class="poster-caption">YOUR MIND IS THE SCENE</span></a>
+          <div class="movie-card-body"><div><h3>Inception</h3><p class="movie-genre">Sci-Fi · Thriller</p></div><span class="price">₹180</span></div><p class="movie-description">Enter a world where ideas can be the most powerful weapon.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Inception">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="the dark knight" data-movie="The Dark Knight">
+          <a class="poster poster-darkknight" href="booking.html?movie=The%20Dark%20Knight" aria-label="Book The Dark Knight"><span class="poster-kicker">GOTHAM CITY</span><span class="poster-graphic graphic-bat"></span><span class="poster-wordmark">THE DARK<br>KNIGHT</span><span class="poster-caption">WHY SO SERIOUS?</span></a>
+          <div class="movie-card-body"><div><h3>The Dark Knight</h3><p class="movie-genre">Action · Crime</p></div><span class="price">₹220</span></div><p class="movie-description">A masked hero faces a criminal who wants to turn the city upside down.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=The%20Dark%20Knight">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="avengers endgame" data-movie="Avengers: Endgame">
+          <a class="poster poster-avengers" href="booking.html?movie=Avengers%3A%20Endgame" aria-label="Book Avengers Endgame"><span class="poster-kicker">ONE LAST STAND</span><span class="poster-graphic graphic-energy"></span><span class="poster-wordmark">AVENGERS<br><small>ENDGAME</small></span><span class="poster-caption">WHATEVER IT TAKES</span></a>
+          <div class="movie-card-body"><div><h3>Avengers: Endgame</h3><p class="movie-genre">Action · Fantasy</p></div><span class="price">₹250</span></div><p class="movie-description">Heroes unite for one final attempt to restore what was lost.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Avengers%3A%20Endgame">Book tickets <span>→</span></a>
+        </article>
+      </div>
+      <div class="empty-search hidden" id="emptySearch"><span>⌕</span><h3>No movies found</h3><p>Try a different title.</p></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand footer-brand" href="index.html"><span class="brand-mark">C</span><span>Cine<span class="brand-accent">Book</span></span></a><p>Made for movie lovers. © <span class="current-year"></span> CineBook</p><div class="footer-links"><a href="movies.html">Movies</a><a href="my-bookings.html">My Bookings</a></div></div></footer>
+</body>
+</html>
