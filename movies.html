@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CineBook | Movies</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <script>try { if (sessionStorage.getItem('cinebookLoggedIn') !== 'yes' || !localStorage.getItem('cinebookCurrentUser')) location.replace('auth.html'); } catch (_) { location.replace('auth.html'); }</script><script src="script.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -15,6 +15,7 @@
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link active" href="movies.html">Movies</a>
         <a class="nav-link" href="my-bookings.html">My Bookings</a>
+        <a class="nav-link" href="auth.html">Login / Sign up</a>
         <a class="nav-cta" href="movies.html">Book tickets <span aria-hidden="true">↗</span></a>
       </div>
       <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
@@ -28,7 +29,7 @@
       <p>Choose a film, pick a showtime, and let the good times roll.</p>
       <div class="movie-toolbar">
         <div class="search-box"><span aria-hidden="true">⌕</span><input id="movieSearch" type="search" placeholder="Search movies..." aria-label="Search movies"></div>
-        <span class="showing-count" id="showingCount">4 movies available</span>
+        <span class="showing-count" id="showingCount">13 movies available</span>
       </div>
     </section>
     <section class="container movies-page-section">
@@ -52,6 +53,51 @@
           <a class="poster poster-avengers" href="booking.html?movie=Avengers%3A%20Endgame" aria-label="Book Avengers Endgame"><span class="poster-kicker">ONE LAST STAND</span><span class="poster-graphic graphic-energy"></span><span class="poster-wordmark">AVENGERS<br><small>ENDGAME</small></span><span class="poster-caption">WHATEVER IT TAKES</span></a>
           <div class="movie-card-body"><div><h3>Avengers: Endgame</h3><p class="movie-genre">Action · Fantasy</p></div><span class="price">₹250</span></div><p class="movie-description">Heroes unite for one final attempt to restore what was lost.</p>
           <a class="button button-primary button-full" href="booking.html?movie=Avengers%3A%20Endgame">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="dune part two" data-movie="Dune: Part Two">
+          <a class="poster poster-avengers" href="booking.html?movie=Dune%3A%20Part%20Two" aria-label="Book Dune: Part Two"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-energy"></span><span class="poster-wordmark">DUNE<br><small>PART TWO</small></span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>Dune: Part Two</h3><p class="movie-genre">Sci-Fi · Adventure</p></div><span class="price">₹240</span></div><p class="movie-description">A desert-world epic full of danger, destiny and discovery.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Dune%3A%20Part%20Two">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="spider man no way home" data-movie="Spider-Man: No Way Home">
+          <a class="poster poster-darkknight" href="booking.html?movie=Spider-Man%3A%20No%20Way%20Home" aria-label="Book Spider-Man: No Way Home"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-bat"></span><span class="poster-wordmark">SPIDER-MAN</span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>Spider-Man: No Way Home</h3><p class="movie-genre">Action · Adventure</p></div><span class="price">₹230</span></div><p class="movie-description">A friendly neighbourhood hero faces an extraordinary challenge.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Spider-Man%3A%20No%20Way%20Home">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="jurassic world" data-movie="Jurassic World">
+          <a class="poster poster-interstellar" href="booking.html?movie=Jurassic%20World" aria-label="Book Jurassic World"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-space"></span><span class="poster-wordmark">JURASSIC<br>WORLD</span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>Jurassic World</h3><p class="movie-genre">Action · Sci-Fi</p></div><span class="price">₹210</span></div><p class="movie-description">A thrilling adventure where prehistoric giants return.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Jurassic%20World">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="the batman" data-movie="The Batman">
+          <a class="poster poster-darkknight" href="booking.html?movie=The%20Batman" aria-label="Book The Batman"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-bat"></span><span class="poster-wordmark">THE BATMAN</span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>The Batman</h3><p class="movie-genre">Action · Crime</p></div><span class="price">₹220</span></div><p class="movie-description">A dark detective mystery unfolds across Gotham City.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=The%20Batman">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="top gun maverick" data-movie="Top Gun: Maverick">
+          <a class="poster poster-inception" href="booking.html?movie=Top%20Gun%3A%20Maverick" aria-label="Book Top Gun: Maverick"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-city"></span><span class="poster-wordmark">TOP GUN<br><small>MAVERICK</small></span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>Top Gun: Maverick</h3><p class="movie-genre">Action · Drama</p></div><span class="price">₹200</span></div><p class="movie-description">An elite pilot returns for a high-stakes mission.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Top%20Gun%3A%20Maverick">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="avatar the way of water" data-movie="Avatar: The Way of Water">
+          <a class="poster poster-interstellar" href="booking.html?movie=Avatar%3A%20The%20Way%20of%20Water" aria-label="Book Avatar: The Way of Water"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-space"></span><span class="poster-wordmark">AVATAR<br><small>WAY OF WATER</small></span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>Avatar: The Way of Water</h3><p class="movie-genre">Fantasy · Sci-Fi</p></div><span class="price">₹250</span></div><p class="movie-description">Return to Pandora for a spectacular ocean adventure.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Avatar%3A%20The%20Way%20of%20Water">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="barbie" data-movie="Barbie">
+          <a class="poster poster-avengers" href="booking.html?movie=Barbie" aria-label="Book Barbie"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-energy"></span><span class="poster-wordmark">BARBIE</span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>Barbie</h3><p class="movie-genre">Comedy · Fantasy</p></div><span class="price">₹190</span></div><p class="movie-description">A colourful comedy about identity, imagination and possibility.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Barbie">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="oppenheimer" data-movie="Oppenheimer">
+          <a class="poster poster-inception" href="booking.html?movie=Oppenheimer" aria-label="Book Oppenheimer"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-city"></span><span class="poster-wordmark">OPPENHEIMER</span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>Oppenheimer</h3><p class="movie-genre">Drama · History</p></div><span class="price">₹220</span></div><p class="movie-description">A gripping historical drama about the dawn of the atomic age.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=Oppenheimer">Book tickets <span>→</span></a>
+        </article>
+        <article class="movie-card" data-title="the super mario bros movie" data-movie="The Super Mario Bros. Movie">
+          <a class="poster poster-avengers" href="booking.html?movie=The%20Super%20Mario%20Bros.%20Movie" aria-label="Book The Super Mario Bros. Movie"><span class="poster-kicker">NOW SHOWING</span><span class="poster-graphic graphic-energy"></span><span class="poster-wordmark">SUPER MARIO<br><small>BROS.</small></span><span class="poster-caption">CINEBOOK FEATURE</span></a>
+          <div class="movie-card-body"><div><h3>The Super Mario Bros. Movie</h3><p class="movie-genre">Animation · Adventure</p></div><span class="price">₹180</span></div><p class="movie-description">A fun animated adventure through the Mushroom Kingdom.</p>
+          <a class="button button-primary button-full" href="booking.html?movie=The%20Super%20Mario%20Bros.%20Movie">Book tickets <span>→</span></a>
         </article>
       </div>
       <div class="empty-search hidden" id="emptySearch"><span>⌕</span><h3>No movies found</h3><p>Try a different title.</p></div>

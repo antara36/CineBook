@@ -2,9 +2,27 @@ const MOVIES = {
   "Interstellar": { price: 200, genre: "Sci-Fi · Adventure", poster: "poster-interstellar", title: "INTER<br>STELLAR" },
   "Inception": { price: 180, genre: "Sci-Fi · Thriller", poster: "poster-inception", title: "INCEPTION" },
   "The Dark Knight": { price: 220, genre: "Action · Crime", poster: "poster-darkknight", title: "THE DARK<br>KNIGHT" },
-  "Avengers: Endgame": { price: 250, genre: "Action · Fantasy", poster: "poster-avengers", title: "AVENGERS<br><small>ENDGAME</small>" }
+  "Avengers: Endgame": { price: 250, genre: "Action · Fantasy", poster: "poster-avengers", title: "AVENGERS<br><small>ENDGAME</small>" },
+  "Dune: Part Two": { price: 240, genre: "Sci-Fi · Adventure", poster: "poster-avengers", title: "DUNE<br><small>PART TWO</small>" },
+  "Spider-Man: No Way Home": { price: 230, genre: "Action · Adventure", poster: "poster-darkknight", title: "SPIDER-MAN" },
+  "Jurassic World": { price: 210, genre: "Action · Sci-Fi", poster: "poster-interstellar", title: "JURASSIC<br>WORLD" },
+  "The Batman": { price: 220, genre: "Action · Crime", poster: "poster-darkknight", title: "THE BATMAN" },
+  "Top Gun: Maverick": { price: 200, genre: "Action · Drama", poster: "poster-inception", title: "TOP GUN<br><small>MAVERICK</small>" },
+  "Avatar: The Way of Water": { price: 250, genre: "Fantasy · Sci-Fi", poster: "poster-interstellar", title: "AVATAR<br><small>WAY OF WATER</small>" },
+  "Barbie": { price: 190, genre: "Comedy · Fantasy", poster: "poster-avengers", title: "BARBIE" },
+  "Oppenheimer": { price: 220, genre: "Drama · History", poster: "poster-inception", title: "OPPENHEIMER" },
+  "The Super Mario Bros. Movie": { price: 180, genre: "Animation · Adventure", poster: "poster-avengers", title: "SUPER MARIO<br><small>BROS.</small>" }
 };
 const STORAGE_KEY = "cinebookBookings";
+const THEATRES = [
+  { name: "CineBook Central", areas: ["mumbai", "andheri", "bandra", "thane", "pune", "delhi", "bengaluru", "bangalore", "hyderabad", "chennai"] },
+  { name: "PVR Galaxy", areas: ["mumbai", "andheri", "bandra", "delhi", "pune", "bengaluru", "bangalore"] },
+  { name: "INOX Riverside", areas: ["mumbai", "thane", "pune", "hyderabad", "chennai", "kolkata"] },
+  { name: "CityLights Multiplex", areas: ["mumbai", "delhi", "pune", "chennai", "kolkata", "hyderabad"] }
+];
+const SEATS = ["A","B","C","D","E","F"].flatMap(row => Array.from({length: 8}, (_, i) => `${row}${i+1}`));
+function getSeatBookings() { return getBookings(); }
+
 
 function getBookings() {
   try {
@@ -67,6 +85,7 @@ function initBookingForm() {
   const ticketCount = document.getElementById("ticketCount");
   const showDate = document.getElementById("showDate");
   const message = document.getElementById("formMessage");
+  movieSelect.innerHTML = '<option value="">Select a movie</option>' + Object.entries(MOVIES).map(([name, movie]) => `<option value="${escapeHTML(name)}">${escapeHTML(name)} — ₹${movie.price}</option>`).join("");
   const params = new URLSearchParams(window.location.search);
   const requestedMovie = params.get("movie");
   if (requestedMovie && MOVIES[requestedMovie]) movieSelect.value = requestedMovie;
@@ -74,6 +93,41 @@ function initBookingForm() {
   const today = new Date();
   const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
   showDate.min = localToday;
+  const locationInput = document.getElementById("userLocation");
+  const theatreSelect = document.getElementById("theatreSelect");
+  const seatMap = document.getElementById("seatMap");
+  const selectedSeatsInput = document.getElementById("selectedSeats");
+  const seatStatus = document.getElementById("seatStatus");
+  let selectedSeats = [];
+  function theatreList() {
+    if (!locationInput || !theatreSelect) return;
+    const location = locationInput.value.trim().toLowerCase();
+    const matches = location ? THEATRES.filter(t => t.areas.some(area => location.includes(area))) : [];
+    const options = matches.length ? matches : (location ? THEATRES.slice(0, 3) : []);
+    theatreSelect.innerHTML = '<option value="">Select a nearby theatre</option>' + options.map((t, i) => `<option value="${escapeHTML(t.name)}">${escapeHTML(t.name)}${i === 0 ? " · suggested match" : ""}</option>`).join("");
+    selectedSeats = []; renderSeats();
+  }
+  function renderSeats() {
+    if (!seatMap) return;
+    const ready = locationInput.value.trim() && theatreSelect.value && showDate.value && document.getElementById("showTime").value;
+    const bookings = getSeatBookings();
+    const occupied = new Set();
+    if (ready) bookings.filter(b => b.movie === movieSelect.value && b.showDate === showDate.value && b.showTime === document.getElementById("showTime").value && b.theatre === theatreSelect.value).forEach(b => (b.seats || []).forEach(seat => occupied.add(seat)));
+    seatMap.innerHTML = ready ? '<div class="screen-label">SCREEN</div><div class="seat-grid">' + SEATS.map(seat => `<button type="button" class="seat ${occupied.has(seat) ? "occupied" : ""} ${selectedSeats.includes(seat) ? "chosen" : ""}" data-seat="${seat}" ${occupied.has(seat) ? "disabled" : ""} aria-label="Seat ${seat}${occupied.has(seat) ? ", unavailable" : ""}">${seat}</button>`).join("") + '</div><div class="seat-legend"><span>Available</span><span>Selected</span><span>Booked</span></div>' : '<p class="seat-placeholder">Enter your location, choose a theatre, date and showtime to view seats.</p>';
+    if (seatStatus) seatStatus.textContent = ready ? `${occupied.size} booked · ${SEATS.length - occupied.size} available` : "Select a theatre, date and showtime first";
+    if (selectedSeatsInput) selectedSeatsInput.value = selectedSeats.join(",");
+  }
+  if (locationInput) locationInput.addEventListener("input", theatreList);
+  if (theatreSelect) theatreSelect.addEventListener("change", () => { selectedSeats = []; renderSeats(); });
+  [showDate, document.getElementById("showTime"), movieSelect].forEach(el => el.addEventListener("change", () => { selectedSeats = []; renderSeats(); }));
+  if (seatMap) seatMap.addEventListener("click", event => {
+    const btn = event.target.closest("[data-seat]"); if (!btn || btn.disabled) return;
+    const seat = btn.dataset.seat;
+    if (selectedSeats.includes(seat)) selectedSeats = selectedSeats.filter(x => x !== seat); else if (selectedSeats.length < Number(ticketCount.value || 1)) selectedSeats.push(seat);
+    renderSeats();
+  });
+  ticketCount.addEventListener("change", () => { selectedSeats = selectedSeats.slice(0, Number(ticketCount.value || 1)); renderSeats(); });
+  renderSeats();
 
   function updateSummary() {
     const name = movieSelect.value;
@@ -87,9 +141,8 @@ function initBookingForm() {
     document.getElementById("summaryTotal").textContent = `₹${(movie ? movie.price : 0) * quantity}`;
     poster.className = `summary-art ${movie ? movie.poster : "poster-interstellar"}`;
     document.getElementById("summaryPosterTitle").innerHTML = movie ? movie.title : "INTER<br>STELLAR";
-    poster.querySelector(".poster-graphic").className = `poster-graphic ${movie ? ({
-      "Interstellar": "graphic-space", "Inception": "graphic-city", "The Dark Knight": "graphic-bat", "Avengers: Endgame": "graphic-energy"
-    })[name] : "graphic-space"}`;
+    const graphicByPoster = { "poster-interstellar": "graphic-space", "poster-inception": "graphic-city", "poster-darkknight": "graphic-bat", "poster-avengers": "graphic-energy" };
+    poster.querySelector(".poster-graphic").className = `poster-graphic ${movie ? graphicByPoster[movie.poster] : "graphic-space"}`;
   }
   movieSelect.addEventListener("change", updateSummary);
   ticketCount.addEventListener("change", updateSummary);
@@ -106,8 +159,8 @@ function initBookingForm() {
     const time = String(formData.get("showTime") || "");
     const quantity = Number(formData.get("ticketCount") || 1);
 
-    if (!name || !email || !MOVIES[movieName] || !date || !time || !quantity) {
-      message.textContent = "Please complete all fields before confirming your booking.";
+    if (!name || !email || !MOVIES[movieName] || !date || !time || !quantity || !locationInput.value.trim() || !theatreSelect.value || selectedSeats.length !== quantity) {
+      message.textContent = "Please complete all fields, select a theatre, and choose exactly as many seats as tickets.";
       message.className = "form-message error";
       return;
     }
@@ -125,6 +178,9 @@ function initBookingForm() {
       showDate: date,
       showTime: time,
       ticketCount: quantity,
+      location: locationInput.value.trim(),
+      theatre: theatreSelect.value,
+      seats: [...selectedSeats],
       pricePerTicket: movie.price,
       total: movie.price * quantity,
       createdAt: new Date().toISOString()
@@ -139,12 +195,69 @@ function initBookingForm() {
       movieSelect.value = "";
       ticketCount.value = "1";
       updateSummary();
-      window.setTimeout(() => { window.location.href = "my-bookings.html"; }, 700);
+      window.setTimeout(() => { window.location.href = `success.html?id=${encodeURIComponent(booking.id)}`; }, 700);
     } catch (error) {
       message.textContent = "Your browser could not save this booking. Please check your browser storage settings.";
       message.className = "form-message error";
     }
   });
+}
+function initAuth() {
+  const form = document.getElementById("authForm"); if (!form) return;
+  const mode = document.getElementById("authMode"), nameField = document.getElementById("authNameField"), heading = document.getElementById("authHeading"), submit = document.getElementById("authSubmit"), message = document.getElementById("authMessage");
+  const loginButton = document.getElementById("showLogin"), signupButton = document.getElementById("showSignup");
+  function setMode(value) {
+    mode.value = value;
+    const signup = value === "signup";
+    nameField.classList.toggle("hidden", !signup);
+    document.getElementById("authName").required = signup;
+    heading.textContent = signup ? "Create your account" : "Welcome back.";
+    submit.textContent = signup ? "Create account" : "Log in →";
+    loginButton.className = `button ${signup ? "button-secondary" : "button-primary"}`;
+    signupButton.className = `button ${signup ? "button-primary" : "button-secondary"}`;
+    message.classList.add("hidden");
+  }
+  loginButton.addEventListener("click", () => setMode("login"));
+  signupButton.addEventListener("click", () => setMode("signup"));
+  mode.addEventListener("change", () => setMode(mode.value));
+  setMode("login");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const email = document.getElementById("authEmail").value.trim().toLowerCase();
+    const password = document.getElementById("authPassword").value;
+    const signup = mode.value === "signup";
+    let users = [];
+    try { users = JSON.parse(localStorage.getItem("cinebookUsers") || "[]"); } catch (_) {}
+    const found = users.find(u => u.email === email);
+    if (signup) {
+      if (found) { message.textContent = "An account with this email already exists. Please log in instead."; message.className = "form-message error"; return; }
+      const name = document.getElementById("authName").value.trim();
+      if (!name) { message.textContent = "Please enter your name."; message.className = "form-message error"; return; }
+      users.push({ name, email, password });
+      try { localStorage.setItem("cinebookUsers", JSON.stringify(users)); }
+      catch (_) { message.textContent = "Could not save your account in this browser. Check storage settings."; message.className = "form-message error"; return; }
+      localStorage.removeItem("cinebookCurrentUser");
+      form.reset();
+      setMode("login");
+      document.getElementById("authEmail").value = email;
+      message.textContent = "Account created successfully. Please log in with your email and password.";
+      message.className = "form-message success";
+      return;
+    }
+    if (!found || found.password !== password) {
+      message.textContent = "Email or password is incorrect. If you're new, choose Sign up.";
+      message.className = "form-message error"; return;
+    }
+    localStorage.setItem("cinebookCurrentUser", JSON.stringify({ name: found.name, email: found.email }));
+    sessionStorage.setItem("cinebookLoggedIn", "yes");
+    message.textContent = "Login successful! Opening home page…";
+    message.className = "form-message success";
+    setTimeout(() => location.href = "index.html", 400);
+  });
+}
+function initSuccess() {
+ const target = document.getElementById("successDetails"); if (!target) return; const id = new URLSearchParams(location.search).get("id"); const booking = getBookings().find(b => b.id === id); if (!booking) { target.innerHTML = '<p>Your booking confirmation could not be found on this browser.</p>'; return; }
+ target.innerHTML = `<h2>${escapeHTML(booking.movie)}</h2><p><strong>Booking ID:</strong> ${escapeHTML(booking.id)}</p><p><strong>Theatre:</strong> ${escapeHTML(booking.theatre || "—")}</p><p><strong>Location:</strong> ${escapeHTML(booking.location || "—")}</p><p><strong>Date & time:</strong> ${escapeHTML(formatDate(booking.showDate))} · ${escapeHTML(booking.showTime)}</p><p><strong>Seats:</strong> ${escapeHTML((booking.seats || []).join(", "))}</p><p><strong>Tickets:</strong> ${booking.ticketCount} · <strong>Total:</strong> ₹${booking.total}</p>`;
 }
 function initBookingsList() {
   const list = document.getElementById("bookingsList");
@@ -170,6 +283,8 @@ function initBookingsList() {
               <span class="detail-chip">▦ ${escapeHTML(formatDate(booking.showDate))}</span>
               <span class="detail-chip">◷ ${escapeHTML(booking.showTime)}</span>
               <span class="detail-chip">♙ ${quantity} ticket${quantity === 1 ? "" : "s"}</span>
+              <span class="detail-chip">⌖ ${escapeHTML(booking.theatre || "Theatre not saved")}</span>
+              <span class="detail-chip">Seats: ${escapeHTML((booking.seats || []).join(", ") || "Not recorded")}</span>
               <span class="detail-chip">ID: ${escapeHTML(booking.id || "CineBook")}</span>
             </div>
           </div>
@@ -190,10 +305,20 @@ function initBookingsList() {
   });
   render();
 }
+function enforceLogin() {
+  const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  if (page === "auth.html") return;
+  let loggedIn = false;
+  try { loggedIn = sessionStorage.getItem("cinebookLoggedIn") === "yes" && !!localStorage.getItem("cinebookCurrentUser"); } catch (_) {}
+  if (!loggedIn) location.replace("auth.html");
+}
 document.addEventListener("DOMContentLoaded", () => {
+  enforceLogin();
   initNavigation();
   initYear();
   initMovieSearch();
   initBookingForm();
   initBookingsList();
+  initAuth();
+  initSuccess();
 });

@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CineBook | Home</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    // Require a login before showing the home page.
+    try {
+      if (sessionStorage.getItem('cinebookLoggedIn') !== 'yes' || !localStorage.getItem('cinebookCurrentUser')) window.location.replace('auth.html');
+    } catch (_) { window.location.replace('auth.html'); }
+  </script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -15,6 +21,7 @@
         <a class="nav-link active" href="index.html">Home</a>
         <a class="nav-link" href="movies.html">Movies</a>
         <a class="nav-link" href="my-bookings.html">My Bookings</a>
+        <a class="nav-link" href="auth.html">Login / Sign up</a>
         <a class="nav-cta" href="movies.html">Book tickets <span aria-hidden="true">↗</span></a>
       </div>
       <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
@@ -47,7 +54,7 @@
     </section>
 
     <section class="stats-strip container">
-      <div class="stat"><strong>04</strong><span>Featured movies</span></div>
+      <div class="stat"><strong>13</strong><span>Movies available</span></div>
       <div class="stat"><strong>05</strong><span>Daily showtimes</span></div>
       <div class="stat"><strong>₹180<span class="stat-plus">+</span></strong><span>Ticket prices</span></div>
       <div class="stat stat-note"><span class="stat-star">✦</span><span>Pick a film.<br>Make a memory.</span></div>
@@ -74,6 +81,9 @@
           <div class="movie-card-body"><div><h3>The Dark Knight</h3><p class="movie-genre">Action · Crime</p></div><span class="price">₹220</span></div>
           <a class="card-book-link" href="booking.html?movie=The%20Dark%20Knight">Book tickets <span>→</span></a>
         </article>
+        <article class="movie-card"><a class="poster poster-avengers" href="booking.html?movie=Dune%3A%20Part%20Two" aria-label="Book Dune Part Two"><span class="poster-kicker">SCI-FI · ADVENTURE</span><span class="poster-graphic graphic-energy"></span><span class="poster-wordmark">DUNE<br><small>PART TWO</small></span><span class="poster-caption">NOW SHOWING</span></a><div class="movie-card-body"><div><h3>Dune: Part Two</h3><p class="movie-genre">Sci-Fi · Adventure</p></div><span class="price">₹240</span></div><a class="card-book-link" href="booking.html?movie=Dune%3A%20Part%20Two">Book tickets <span>→</span></a></article>
+        <article class="movie-card"><a class="poster poster-inception" href="booking.html?movie=Oppenheimer" aria-label="Book Oppenheimer"><span class="poster-kicker">DRAMA · HISTORY</span><span class="poster-graphic graphic-city"></span><span class="poster-wordmark">OPPENHEIMER</span><span class="poster-caption">A STORY THAT CHANGED HISTORY</span></a><div class="movie-card-body"><div><h3>Oppenheimer</h3><p class="movie-genre">Drama · History</p></div><span class="price">₹220</span></div><a class="card-book-link" href="booking.html?movie=Oppenheimer">Book tickets <span>→</span></a></article>
+        <article class="movie-card"><a class="poster poster-darkknight" href="booking.html?movie=The%20Batman" aria-label="Book The Batman"><span class="poster-kicker">ACTION · CRIME</span><span class="poster-graphic graphic-bat"></span><span class="poster-wordmark">THE BATMAN</span><span class="poster-caption">GOTHAM AWAITS</span></a><div class="movie-card-body"><div><h3>The Batman</h3><p class="movie-genre">Action · Crime</p></div><span class="price">₹220</span></div><a class="card-book-link" href="booking.html?movie=The%20Batman">Book tickets <span>→</span></a></article>
       </div>
     </section>
 

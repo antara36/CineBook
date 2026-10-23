@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CineBook | My Bookings</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <script>try { if (sessionStorage.getItem('cinebookLoggedIn') !== 'yes' || !localStorage.getItem('cinebookCurrentUser')) location.replace('auth.html'); } catch (_) { location.replace('auth.html'); }</script><script src="script.js" defer></script>
 </head>
 <body>
   <header class="site-header">
