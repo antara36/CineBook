@@ -235,3 +235,22 @@ h1, h2, h3 { font-family: 'Manrope', Arial, sans-serif; }
 /* Login / sign-up mode buttons */
 .auth-panel .auth-actions { gap: 10px; }
 .auth-panel .auth-actions .button { flex: 1; justify-content: center; }
+
+
+/* Log Out button */
+.logout-btn {
+    background-color: #f3ca86;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: #f3ca86;
+}
