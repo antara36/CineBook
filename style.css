@@ -254,3 +254,19 @@ h1, h2, h3 { font-family: 'Manrope', Arial, sans-serif; }
 .logout-btn:hover {
     background-color: #f3ca86;
 }
+
+
+.seat.occupied,
+.seat.occupied:disabled {
+  background-color: #e63946 !important;
+  color: #ffffff !important;
+  border-color: #e63946 !important;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.seat.chosen {
+  background-color: #f3ca86;
+  color: #101114;
+  border-color: #f3ca86;
+}
